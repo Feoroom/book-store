@@ -11,5 +11,5 @@ server:
 #connStr := "postgres://postgres:123@localhost/webapp?sslmode=disable"
 # connStr := "user=postgres dbname=webapp password=123 sslmode=disable"
 database:
-  name: "postgres"
-  conn_str: "postgres://postgres:123@localhost/webapp?sslmode=disable"
+  name: "sqlite3"
+  conn_str: "./identifier.sqlite"

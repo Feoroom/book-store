@@ -1,7 +1,7 @@
 {{define "nav"}}
 <nav>
     <ul>
-        <li><a href="/">Главная</a></li>
+        <li><a href="/">Главная1</a></li>
         <li>
             <img src="/static/images/order-3.png" alt="">
             <a href="/user/order">Заказы</a>
@@ -13,8 +13,8 @@
         {{if .IsAuthenticated}}
 
             <li>
-                <img src="/static/images/person-4.png" alt="">
-                <a href="/user/account">Пользователь#{{.UserID}}</a>
+
+                <a href="/user/account"><i class="fa-regular fa-user"></i>Пользователь#{{.UserID}}</a>
             </li>
             <li>
                 <img src="/static/images/logout.png" alt="">
@@ -23,11 +23,10 @@
                 </form>
             </li>
         {{else}}
-{{/*            <li><a href="/user/signup">Зарегистрироваться</a></li>*/}}
+            <li><a href="/user/signup">Зарегистрироваться</a></li>
 
 <li>
-    <img src="/static/images/person-4.png" alt="">
-    <a href="/user/login">Войти</a>
+    <a href="/user/login"><i class="fa-regular fa-user"></i>Войти</a>
 </li>
 
         {{end}}

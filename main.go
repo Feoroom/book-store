@@ -4,11 +4,10 @@ import (
 	"book_ex/cmd/web"
 	"book_ex/internal/config"
 	"book_ex/internal/models"
-	"crypto/tls"
 	"database/sql"
 	"github.com/alexedwards/scs/v2"
 	"github.com/go-playground/form/v4"
-	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
 	"os"
@@ -55,9 +54,9 @@ func main() {
 	sessionManager.Cookie.Secure = true
 
 	//
-	tlsConfig := &tls.Config{
-		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
-	}
+	//tlsConfig := &tls.Config{
+	//	CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
+	//}
 
 	//Application
 	app := &web.Application{
@@ -73,17 +72,18 @@ func main() {
 
 	//Server struct
 	srv := &http.Server{
-		Addr:         cfg.Address,
-		ErrorLog:     errorLog,
-		Handler:      app.Routes(),
-		TLSConfig:    tlsConfig,
+		Addr:     cfg.Address,
+		ErrorLog: errorLog,
+		Handler:  app.Routes(),
+		//TLSConfig:    tlsConfig,
 		IdleTimeout:  cfg.IdleTimeout,
 		ReadTimeout:  cfg.ReadTimeout,
 		WriteTimeout: cfg.WriteTimeout,
 	}
 
 	infoLog.Printf("Starting server on: %s", cfg.Address)
-	err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
+	//err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
+	err = srv.ListenAndServe()
 	errorLog.Fatal(err)
 }
 
